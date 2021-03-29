@@ -350,9 +350,9 @@ if __name__ == '__main__':
     X, X_mask2 = Attention_2(X, 512, training=training_flag)
     X = residual_block(X, out_channels = 1024, stride = 2, training = training_flag)
     X, X_mask3 = Attention_3(X, 1024, training=training_flag)
-    X = residual_block(X, out_channels = 2048, stride = 2, training = training_flag)
-    X = residual_block(X, out_channels = 2048, stride = 1, training = training_flag)
-    X = residual_block(X, out_channels = 2048, stride = 1, training = training_flag)
+#     X = residual_block(X, out_channels = 2048, stride = 2, training = training_flag)
+#     X = residual_block(X, out_channels = 2048, stride = 1, training = training_flag)
+#     X = residual_block(X, out_channels = 2048, stride = 1, training = training_flag)
 
     X = tf.layers.batch_normalization(X, axis=-1, training = training_flag)
     X = tf.nn.relu(X)
@@ -408,25 +408,25 @@ if __name__ == '__main__':
         train_predict = []
         train_GT = []
 
-        # for batch_num in range(total_batch_train):
-        #     x, y = get_batch(x_train, y_train, batch_num, batch_size)
-        #     (_, train_loss, train_pred) = sess.run((train, loss, pred), feed_dict={
-        #         input_x: x,
-        #         input_y: y,
-        #         training_flag: True
-        #     })
-        #     loss_batch_list.append(train_loss)
-        #     train_predict.append(train_pred)
-        #     train_GT.append(y)
-        #
-        # train_loss_draw_list.append(np.mean(np.array(loss_batch_list)))
-        # print('train_loss:', train_loss_draw_list[-1])
-        #
-        # train_predict = np.vstack(train_predict)
-        # train_GT = np.vstack(train_GT)
-        # train_acc = np.mean(np.equal(np.argmax(train_predict, axis = 1), np.argmax(train_GT, axis =  1)).astype(np.float32))
-        #
-        # print("train_acc:", train_acc)
+        for batch_num in range(total_batch_train):
+            x, y = get_batch(x_train, y_train, batch_num, batch_size)
+            (_, train_loss, train_pred) = sess.run((train, loss, pred), feed_dict={
+                input_x: x,
+                input_y: y,
+                training_flag: True
+            })
+            loss_batch_list.append(train_loss)
+            train_predict.append(train_pred)
+            train_GT.append(y)
+        
+        train_loss_draw_list.append(np.mean(np.array(loss_batch_list)))
+        print('train_loss:', train_loss_draw_list[-1])
+        
+        train_predict = np.vstack(train_predict)
+        train_GT = np.vstack(train_GT)
+        train_acc = np.mean(np.equal(np.argmax(train_predict, axis = 1), np.argmax(train_GT, axis =  1)).astype(np.float32))
+        
+        print("train_acc:", train_acc)
 
 
         test_predict = []
@@ -438,17 +438,6 @@ if __name__ == '__main__':
                 training_flag: False
             })
 
-            # try: # the last batch will out of range, so use try-exept
-            #     for index in range(batch_size):
-            #         img_index = i * batch_size + index
-            #         save_img(s_map1[index], img_index, saliency_path, img_name='_att1.jpg', mode = "heatmap")
-            #         save_img(s_map2[index], img_index, saliency_path, img_name='_att2.jpg', mode = "heatmap")
-            #         save_img(s_map3[index], img_index, saliency_path, img_name='_att3.jpg', mode = "heatmap")
-            #         save_img(x_test[index], img_index, saliency_path, img_name = '_input1.jpg', mode = "image")
-            #
-            #
-            # except:
-            #     print('save_all_image_and saliency map of one test epoch!')
 
 
             test_predict.append(test_pred)
