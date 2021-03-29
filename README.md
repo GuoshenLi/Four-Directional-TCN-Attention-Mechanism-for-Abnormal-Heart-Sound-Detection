@@ -22,7 +22,7 @@ Actually, you can plug in this softmask branch in any CNN architecture you like!
 <img src = https://github.com/GuoshenLi/Four-Directional-TCN-Attention-Mechanism-for-Abnormal-Heart-Sound-Detection/blob/main/tcn_masking_model.png><br/>
 
 ### The 4D-TCN atchitecture
-<img src = https://github.com/GuoshenLi/Four-Directional-TCN-Attention-Mechanism-for-Abnormal-Heart-Sound-Detection/blob/main/4dtcn.png width = '360' height = '360'/><br/>
+<img src = https://github.com/GuoshenLi/Four-Directional-TCN-Attention-Mechanism-for-Abnormal-Heart-Sound-Detection/blob/main/4dtcn.png width = '418' height = '368'/><br/>
 
 
 The model is implemented by tensorflow 1.x.
